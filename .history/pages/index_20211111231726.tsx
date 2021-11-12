@@ -6,28 +6,38 @@ import Header from '../src/components/Header/header'
 import { Router, useRouter } from 'next/dist/client/router'
 import { getMovie } from './api/hello'
 import Detail from './DetailProduct/Detail'
+import  'Header.module.css'
 function ListCard(props) {
   const router = useRouter()
   const [state, setstate] = useState()
 
   useEffect(() => {
-    const data = fetch('http://localhost:5000/api/product')
-      .then(() => {
-        setstate(data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    const data = fetch('localhost:3001/api/product').catch((error) => {
+      console.log(error)
+    })
     console.log(props)
   }, [])
 
   const handleClick = () => {
     // router.push('/DetailProduct/' + props.data.id)
   }
-  console.log(state)
+
   return (
     <React.Fragment>
-      <Header></Header>
+      {/* <Header></Header> */}
+      <nav class="navbar">
+<div class="nav">
+    <img src="img/dark-logo.png" class="brand-logo" alt="">
+    <div class="nav-items">
+        <div class="search">
+            <input type="text" class="search-box" placeholder="search brand, product">
+            <button class="search-btn">search</button>
+        </div>
+        <a href="#"><img src="img/user.png" alt=""></a>
+        <a href="#"><img src="img/cart.png" alt=""></a>
+    </div>
+</div>
+</nav>
       <div style={{ padding: '10px' }}>
         <div className={styles.container}></div>
         <div className={styles.cardList}>

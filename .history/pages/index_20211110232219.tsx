@@ -2,7 +2,7 @@ import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded'
 import WifiIcon from '@material-ui/icons/Wifi'
 import React, { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
-import Header from '../src/components/Header/header'
+import Header from './components/Header/header'
 import { Router, useRouter } from 'next/dist/client/router'
 import { getMovie } from './api/hello'
 import Detail from './DetailProduct/Detail'
@@ -10,21 +10,21 @@ function ListCard(props) {
   const router = useRouter()
   const [state, setstate] = useState()
 
-  useEffect(() => {
-    const data = fetch('http://localhost:5000/api/product')
-      .then(() => {
-        setstate(data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    console.log(props)
-  }, [])
+  // useEffect(() => {
+  //   fetch('localhost:3031/api/product')
+  //     .then((res) => {
+  //       setstate(res.data.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }, [])
+
+  console.log(state)
 
   const handleClick = () => {
-    // router.push('/DetailProduct/' + props.data.id)
+    router.push('/DetailProduct/' + props.data.id)
   }
-  console.log(state)
   return (
     <React.Fragment>
       <Header></Header>
@@ -34,7 +34,7 @@ function ListCard(props) {
           <div className={styles.cardItem}>
             <img
               onClick={handleClick}
-              // src={props.dataDemo.image}
+              src={props.dataDemo.image}
               alt="hinh-card"
               className={styles.cardImage}
             ></img>
@@ -42,7 +42,7 @@ function ListCard(props) {
               <div className={styles.cardTop}>
                 <h3 className={styles.cardTitle}>
                   {/* 2020 World Champs Gaming Warzone */}
-                  {/* {props.dataDemo.description} */}
+                  {props.dataDemo.description}
                 </h3>
                 <div className={styles.cardUser}>
                   <img
@@ -210,17 +210,17 @@ function ListCard(props) {
 }
 export default ListCard
 
-// export async function getStaticProps() {
-//   const data = await fetch('localhost:3031/api/product').catch((error) => {
-//     console.log(error)
-//   })
-//   const returnData = await data.json()
-//   return {
-//     props: {
-//       dataDemo: returnData,
-//     },
-//   }
-// }
+export async function getStaticProps() {
+  const data = await fetch('localhost:3031/api/product').catch((error) => {
+    console.log(error)
+  })
+  const returnData = await data.json()
+  return {
+    props: {
+      dataDemo: returnData,
+    },
+  }
+}
 
 // export async function getStaticProps() {
 //   const data = await getMovie()

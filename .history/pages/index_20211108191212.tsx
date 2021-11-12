@@ -1,48 +1,44 @@
+
+
+
+
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded'
 import WifiIcon from '@material-ui/icons/Wifi'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from '../styles/Home.module.css'
-import Header from '../src/components/Header/header'
+import Header from './components/Header/header'
 import { Router, useRouter } from 'next/dist/client/router'
 import { getMovie } from './api/hello'
-import Detail from './DetailProduct/Detail'
-function ListCard(props) {
+import Detail from './components/Detail'
+function ListCard(props)
+{
   const router = useRouter()
-  const [state, setstate] = useState()
 
-  useEffect(() => {
-    const data = fetch('http://localhost:5000/api/product')
-      .then(() => {
-        setstate(data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    console.log(props)
-  }, [])
-
-  const handleClick = () => {
-    // router.push('/DetailProduct/' + props.data.id)
+  const handleClick = () =>
+  {
+    
+    router.push('/DetailProduct/' + props.data.id)
   }
-  console.log(state)
   return (
+
     <React.Fragment>
-      <Header></Header>
+       <Header></Header>
       <div style={{ padding: '10px' }}>
+       
         <div className={styles.container}></div>
         <div className={styles.cardList}>
           <div className={styles.cardItem}>
             <img
               onClick={handleClick}
-              // src={props.dataDemo.image}
+              src="https://images.unsplash.com/photo-1635341376461-e82ce5d50beb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=692&q=80"
               alt="hinh-card"
               className={styles.cardImage}
             ></img>
-            <div className={styles.cardContent}>
+            <div  className={styles.cardContent}>
               <div className={styles.cardTop}>
                 <h3 className={styles.cardTitle}>
-                  {/* 2020 World Champs Gaming Warzone */}
-                  {/* {props.dataDemo.description} */}
+                  2020 World Champs Gaming Warzone
+                  {props.data.description}
                 </h3>
                 <div className={styles.cardUser}>
                   <img
@@ -63,7 +59,7 @@ function ListCard(props) {
               </div>
               <div className={styles.cardBottom}>
                 <div className={styles.cardLive}>
-                  <span>600.000 đ</span>
+                <span>600.000 đ</span>
                 </div>
                 <div className={styles.cardWatching}>4.2k Lươt mua</div>
               </div>
@@ -100,7 +96,7 @@ function ListCard(props) {
               </div>
               <div className={styles.cardBottom}>
                 <div className={styles.cardLive}>
-                  <span>600.000 đ</span>
+                <span>600.000 đ</span>
                 </div>
                 <div className={styles.cardWatching}>4.2k Lươt mua</div>
               </div>
@@ -136,7 +132,7 @@ function ListCard(props) {
               </div>
               <div className={styles.cardBottom}>
                 <div className={styles.cardLive}>
-                  <span>600.000 đ</span>
+                <span>600.000 đ</span>
                 </div>
                 <div className={styles.cardWatching}>4.2k Lươt mua</div>
               </div>
@@ -172,6 +168,7 @@ function ListCard(props) {
               </div>
               <div className={styles.cardBottom}>
                 <div className={styles.cardLive}>
+                  
                   <span>600.000 đ</span>
                 </div>
                 <div className={styles.cardWatching}>4.2k Lươt mua</div>
@@ -211,9 +208,11 @@ function ListCard(props) {
 export default ListCard
 
 // export async function getStaticProps() {
-//   const data = await fetch('localhost:3031/api/product').catch((error) => {
-//     console.log(error)
-//   })
+//   const data = await fetch('https://api.coingecko.com/api/v3/coins/tether').catch(
+//     (error) => {
+//       console.log(error)
+//     }
+//   )
 //   const returnData = await data.json()
 //   return {
 //     props: {
@@ -222,15 +221,16 @@ export default ListCard
 //   }
 // }
 
-// export async function getStaticProps() {
-//   const data = await getMovie()
+export async function getStaticProps()
+{
+  const data = await getMovie()
 
-//   return {
-//     props: {
-//       data: data[1],
-//     },
-//   }
-// }
+  return {
+    props: {
+      data:data[1],
+    },
+  }
+}
 
 // import type { NextPage } from 'next'
 // import { Router, useRouter } from 'next/dist/client/router'
@@ -246,15 +246,15 @@ export default ListCard
 
 //   const handleClick = () =>
 //   {
-
+    
 //     router.push('/ListProduct/' + props.data.id)
 //   }
 //   return (
 //     <div className={styles.container} onClick={handleClick}>
 //       {props.data.map(item => <Detail {...item}></Detail>)}
-
+           
 //       </div>
-
+  
 //   )
 
 // export default Home

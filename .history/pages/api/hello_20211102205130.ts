@@ -6,26 +6,24 @@ type Data = {
 }
 export async function getMovie()
 {
-  const response = [
-    
-    {
+  const response = [{
     id: '1',
     image: 'https://images.unsplash.com/photo-1628075341657-826798e79307?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-    name: 'ten',
-    description: 'mo ta',
+    name: 'ten1',
+    description: 'mo ta 1',
   },
   {
     id: '2',
     image: 'https://images.unsplash.com/photo-1628075341657-826798e79307?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-    name: 'ten',
-    description: 'mo ta',
+    name: 'ten2',
+    description: 'mo ta 2',
     },
     {
       id: '3',
       image: 'https://images.unsplash.com/photo-1628075341657-826798e79307?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-      name: 'ten',
-      description: 'mo ta',
-    },
+      name: 'ten3',
+      description: 'mo ta 3',
+    }
   ]
   return response
 }

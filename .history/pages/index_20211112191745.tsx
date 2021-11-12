@@ -11,20 +11,16 @@ function ListCard(props) {
   const [state, setstate] = useState()
 
   useEffect(() => {
-    const data = fetch('http://localhost:5000/api/product')
-      .then(() => {
-        setstate(data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    const data = fetch('http:localhost:5000/api/product').catch((error) => {
+      console.log(error)
+    })
     console.log(props)
   }, [])
 
   const handleClick = () => {
     // router.push('/DetailProduct/' + props.data.id)
   }
-  console.log(state)
+
   return (
     <React.Fragment>
       <Header></Header>

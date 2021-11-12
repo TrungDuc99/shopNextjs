@@ -2,7 +2,7 @@ import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded'
 import WifiIcon from '@material-ui/icons/Wifi'
 import React, { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
-import Header from '../src/components/Header/header'
+import Header from './components/Header/header'
 import { Router, useRouter } from 'next/dist/client/router'
 import { getMovie } from './api/hello'
 import Detail from './DetailProduct/Detail'
@@ -11,20 +11,16 @@ function ListCard(props) {
   const [state, setstate] = useState()
 
   useEffect(() => {
-    const data = fetch('http://localhost:5000/api/product')
-      .then(() => {
-        setstate(data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    const data = fetch('localhost:5000/api/product').catch((error) => {
+      console.log(error)
+    })
     console.log(props)
   }, [])
 
   const handleClick = () => {
     // router.push('/DetailProduct/' + props.data.id)
   }
-  console.log(state)
+
   return (
     <React.Fragment>
       <Header></Header>
