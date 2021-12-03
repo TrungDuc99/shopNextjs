@@ -79,15 +79,15 @@ function ListCard(props) {
   //   },
   // })
 
-  // useEffect(() => {
-  //   getProduct()
-  //     .then((res) => {
-  //       setData(res.data)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // }, [])
+  useEffect(() => {
+    getProduct()
+      .then((res) => {
+        setData(res.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
   ///--------------git stash
   // useEffect(() => {
   //   const client = new ApolloClient({
@@ -111,25 +111,25 @@ function ListCard(props) {
   // }, [])
 
   useEffect(() => {
-    const client = new ApolloClient({
-      uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
-      cache: new InMemoryCache(),
-    })
-    client
-      .query({
-        query: queriesAxies,
-        variables: {
-          from: 0,
-          size: 20,
-          sort: 'IdDesc',
-          auctionType: 'All',
-          owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
-        },
-      })
-      .then((res) => {
-        setData(res.data.axies.results)
-        // console.log(res.data.axies.results)
-      })
+    // const client = new ApolloClient({
+    //   uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
+    //   cache: new InMemoryCache(),
+    // })
+    // client
+    //   .query({
+    //     query: queriesAxies,
+    //     variables: {
+    //       from: 0,
+    //       size: 20,
+    //       sort: 'IdDesc',
+    //       auctionType: 'All',
+    //       owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+    //     },
+    //   })
+    //   .then((res) => {
+    //     setData(res.data.axies.results)
+    //     // console.log(res.data.axies.results)
+    //   })
   })
 
   const handleRemoveCart = (e, id) => {

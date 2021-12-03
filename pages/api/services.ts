@@ -7,7 +7,7 @@ type Data = {
 }
 
 export async function getUser() {
-  const data = await fetch('http://localhost:5000/api/user').catch((error) => {
+  const data = await fetch('http://45.77.244.252:5000/api/user').catch((error) => {
     console.log(error)
   })
   const returnData = await data.json()
@@ -15,17 +15,21 @@ export async function getUser() {
 }
 
 export async function getProduct() {
-  const data = await fetch('http://localhost:5000/api/product').catch((error) => {
-    console.log(error)
-  })
+  const data = await fetch('http://45.77.244.252:5000/api/product').catch(
+    (error) => {
+      console.log(error)
+    }
+  )
   const returnData = await data.json()
   return returnData
 }
 
 export async function getCategory() {
-  const data = await fetch('http://localhost:5000/api/category').catch((error) => {
-    console.log(error)
-  })
+  const data = await fetch('http://45.77.244.252:5000/api/category').catch(
+    (error) => {
+      console.log(error)
+    }
+  )
   const returnData = await data.json()
   return returnData
 }
