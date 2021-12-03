@@ -88,7 +88,7 @@ function ListCard(props) {
   //       console.log(error)
   //     })
   // }, [])
-
+///--------------git stash
   useEffect(() => {
     const client = new ApolloClient({
       uri: 'http://localhost:5000/graphql',
