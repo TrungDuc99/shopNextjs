@@ -1,233 +1,159 @@
-import React from 'react'
-import { alpha, makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import InputBase from '@material-ui/core/InputBase'
-import Badge from '@material-ui/core/Badge'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
-import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import MailIcon from '@material-ui/icons/Mail'
-import NotificationsIcon from '@material-ui/icons/Notifications'
-import MoreIcon from '@material-ui/icons/MoreVert'
-import { Box } from '@material-ui/core'
+import BazarButton from '@component/BazarButton'
+import Image from '@component/BazarImage'
+import CategoryMenu from '@component/categories/CategoryMenu'
+import FlexBox from '@component/FlexBox'
+import Category from '@component/icons/Category'
+import ShoppingBagOutlined from '@component/icons/ShoppingBagOutlined'
+import MiniCart from '@component/mini-cart/MiniCart'
+import Login from '@component/sessions/Login'
+import { useAppContext } from '@context/app/AppContext'
+import {
+  Badge,
+  Box,
+  Container,
+  Dialog,
+  Drawer,
+  IconButton,
+  styled,
+  useMediaQuery,
+} from '@material-ui/core'
+import { useTheme } from '@material-ui/core/styles'
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
+import PersonOutline from '@material-ui/icons/PersonOutline'
+import { layoutConstant } from '@utils/constants'
+import clsx from 'clsx'
+import Link from 'next/link'
+import React, { FC, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+import SearchBox from '../search-box/SearchBox'
 
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(4),
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(4),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(6),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 4),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(2, 2, 2, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(8)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+// component props interface
+interface HeaderProps {
+  className?: string
+  isFixed?: boolean
+  listItemCart?: string
+}
+
+// styled component
+export const HeaderWrapper = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  zIndex: 1,
+  height: layoutConstant.headerHeight,
+  background: theme.palette.background.paper,
+  transition: 'height 250ms ease-in-out',
+
+  [theme.breakpoints.down('sm')]: {
+    height: layoutConstant.mobileHeaderHeight,
   },
 }))
 
-export default function PrimarySearchAppBar() {
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+const Header: FC<HeaderProps> = ({
+  isFixed,
+  className,
+  listItemCart,
+  handleRemoveCart,
+}) => {
+  const [sidenavOpen, setSidenavOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
-  const isMenuOpen = Boolean(anchorEl)
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+  const toggleSidenav = () => setSidenavOpen(!sidenavOpen)
+  const toggleDialog = () => setDialogOpen(!dialogOpen)
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null)
-  }
+  const { state } = useAppContext()
+  const { cartList } = state.cart
 
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-    handleMobileMenuClose()
-  }
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget)
-  }
-
-  const menuId = 'primary-search-account-menu'
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  )
-
-  const mobileMenuId = 'primary-search-account-menu-mobile'
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
+  const cartHandle = (
+    <Badge badgeContent={cartList.length} color="primary">
+      <Box
+        component={IconButton}
+        ml={2.5}
+        bgcolor="grey.200"
+        p={1.25}
+        onClick={toggleSidenav}
+      >
+        <ShoppingBagOutlined />
+      </Box>
+    </Badge>
   )
 
   return (
-    <Box className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
+    <HeaderWrapper className={clsx(className)}>
+      <Container
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '100%',
+        }}
+      >
+        <FlexBox
+          alignItems="center"
+          mr={2}
+          minWidth="170px"
+          sx={{ display: { xs: 'none', md: 'flex' } }}
+        >
+          <Link href="/">
+            <a>
+              <Image
+                height={50}
+                mb={0.5}
+                src="http://ilovedesign.vn/wp-content/uploads/2012/11/500px-apple_computer_logo_svg_.png"
+                alt="logo"
+              />
+            </a>
+          </Link>
+
+          {isFixed && (
+            <CategoryMenu>
+              <FlexBox color="grey.600" alignItems="center" ml={2}>
+                <BazarButton color="inherit">
+                  <Category fontSize="small" color="inherit" />
+                  <KeyboardArrowDown fontSize="small" color="inherit" />
+                </BazarButton>
+              </FlexBox>
+            </CategoryMenu>
+          )}
+        </FlexBox>
+
+        <FlexBox justifyContent="center" flex="1 1 0">
+          <SearchBox />
+        </FlexBox>
+
+        <FlexBox alignItems="center" sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box
+            component={IconButton}
+            ml={2}
+            p={1.25}
+            bgcolor="grey.200"
+            onClick={toggleDialog}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
-          <Box className={classes.search}>
-            <Box className={classes.searchIcon}>
-              <SearchIcon />
-            </Box>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <PersonOutline />
           </Box>
-          <Box className={classes.grow} />
-          <Box className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
+          {cartHandle}
+        </FlexBox>
+
+        <Dialog
+          open={dialogOpen}
+          fullWidth={isMobile}
+          scroll="body"
+          onClose={toggleDialog}
+        >
+          <Login />
+        </Dialog>
+
+        <Drawer open={sidenavOpen} anchor="right" onClose={toggleSidenav}>
+          <MiniCart
+            listItemCart={listItemCart}
+            handleRemoveCart={handleRemoveCart}
+          />
+        </Drawer>
+      </Container>
+    </HeaderWrapper>
   )
 }
+
+export default Header

@@ -1,75 +1,199 @@
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded'
-import WifiIcon from '@material-ui/icons/Wifi'
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
+import Header from '../src/components/header/Header'
+import Footer from '../src/components/footer/Footer'
 import styles from '../styles/Home.module.css'
-import Header from '../src/components/Header/header'
-import { Router, useRouter } from 'next/dist/client/router'
-import { getMovie } from './api/hello'
-import Detail from './DetailProduct/Detail'
+import {
+  setDataCartRedux,
+  setDataProductRedux,
+  setDataRedux,
+} from '../controller/redux/action'
+import { useDispatch, useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+import { getProduct } from './api/services'
+import {
+  queriesAxies,
+  queriesExample,
+  queriesExampleMutation,
+  queriesExampleMutationCreate,
+  queriesExampleMutationUpdate,
+} from './queries'
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql,
+} from '@apollo/client'
+import { Box } from '@material-ui/core'
+import { cartDataGlobal } from '../common/redux'
+
 function ListCard(props) {
+  const [data, setData] = useState()
+  const [listCart, setListCart] = useState([])
   const router = useRouter()
-  const [state, setstate] = useState()
+
+  // const dispatch = useDispatch()
+  // const connRedux = (state: any) => state.dataRedux
+  // const selectorRedux = createSelector(connRedux, (data) => {
+  //   return data
+  // })
+  // const selectorData = useSelector((state) => selectorRedux(state))
+
+  // const dispatch = useDispatch()
+  // dispatch(setDataProductRedux(props))
+  const dataProductRedux = useSelector((state: any) => state.dataProductRedux)
+  const dataUserRedux = useSelector((state: any) => state.dataUserRedux)
+  const dataRandomRedux = useSelector((state: any) => state.dataRandomRedux)
+  // console.log(dataProductRedux)
+
+  // const connRedux = (state: any) => state.addCartRedux
+  // const selectorRedux = createSelector(connRedux, (data) => {
+  //   return listCart
+  // })
+  // const selectorData = useSelector((state) => selectorRedux(state))
+
+  // console.log(selectorData)
+  const dataCart = useSelector((state: any) => state.addCartRedux)
+
+  // console.log(dataCart)
+  const handleClick = (e, item) => {
+    router.push('/DetailProduct/' + item.id)
+  }
+
+  const handleClickAddCard = (e, item) => {
+    cartDataGlobal(item)
+    const newTodos = [...listCart]
+    newTodos.push(item)
+    setListCart(newTodos)
+  }
+
+  // const { loading, error, data } = useQuery(queriesAxies, {
+  //   variables: {
+  //     from: 0,
+  //     size: 20,
+  //     sort: 'IdDesc',
+  //     auctionType: 'All',
+  //     owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+  //   },
+  // })
+
+  // useEffect(() => {
+  //   getProduct()
+  //     .then((res) => {
+  //       setData(res.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }, [])
 
   useEffect(() => {
-    const data = fetch('http://localhost:5000/api/product')
-      .then(() => {
-        setstate(data)
+    const client = new ApolloClient({
+      uri: 'http://localhost:5000/graphql',
+      cache: new InMemoryCache(),
+    })
+
+    client
+      .mutate({
+        mutation: queriesExampleMutationUpdate,
+        variables: {
+          id: '618d1abe3240c54f1035988c',
+          name: 'testt updateeeeee graphql',
+          price: '12314141asdaasf5',
+          description: 'demomoo updateeeeee graphql',
+        },
       })
-      .catch((error) => {
-        console.log(error)
+      .then((res) => {
+        console.log('Resilt', res)
       })
-    console.log(props)
   }, [])
 
-  const handleClick = () => {
-    // router.push('/DetailProduct/' + props.data.id)
+  // useEffect(() => {
+  //   const client = new ApolloClient({
+  //     uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
+  //     cache: new InMemoryCache(),
+  //   })
+  //   client
+  //     .query({
+  //       query: queriesAxies,
+  //       variables: {
+  //         from: 0,
+  //         size: 20,
+  //         sort: 'IdDesc',
+  //         auctionType: 'All',
+  //         owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setData(res.data.axies.results)
+  //       // console.log(res.data.axies.results)
+  //     })
+  // })
+
+  const handleRemoveCart = (e, id) => {
+    const newListCart = listCart.filter((item) => item._id != id)
+    setListCart(newListCart)
   }
-  console.log(state)
   return (
     <React.Fragment>
-      <Header></Header>
+      <Header listItemCart={listCart} handleRemoveCart={handleRemoveCart}></Header>
       <div style={{ padding: '10px' }}>
         <div className={styles.container}></div>
         <div className={styles.cardList}>
-          <div className={styles.cardItem}>
-            <img
-              onClick={handleClick}
-              // src={props.dataDemo.image}
-              alt="hinh-card"
-              className={styles.cardImage}
-            ></img>
-            <div className={styles.cardContent}>
-              <div className={styles.cardTop}>
-                <h3 className={styles.cardTitle}>
-                  {/* 2020 World Champs Gaming Warzone */}
-                  {/* {props.dataDemo.description} */}
-                </h3>
-                <div className={styles.cardUser}>
-                  <img
-                    src="https://images.unsplash.com/photo-1635586852489-8617f9dd6438?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=685&q=80"
-                    alt="hinh-avatar"
-                    className={styles.cardUserAvatar}
-                  />
-                  <div className={styles.cardUserInfo}>
-                    <div className={styles.cardUserTop}>
-                      <h4 className={styles.cardUserName}>Trung Đức</h4>
-                      <CheckCircleRoundedIcon
-                        style={{ color: 'green' }}
-                      ></CheckCircleRoundedIcon>
+          {data &&
+            data.map((item, index) => (
+              <div className={styles.cardItem}>
+                <img
+                  onClick={(e) => {
+                    handleClick(e, item)
+                  }}
+                  style={{ cursor: 'pointer' }}
+                  src={item.image}
+                  alt="hinh-card"
+                  className={styles.cardImage}
+                ></img>
+                <div className={styles.cardContent}>
+                  <div className={styles.cardTop}>
+                    <h3 className={styles.cardTitle}>{item.description}</h3>
+                    <div className={styles.cardUser}>
+                      <img
+                        src={item.image}
+                        alt="hinh-avatar"
+                        className={styles.cardUserAvatar}
+                      />
+                      <div className={styles.cardUserInfo}>
+                        <div className={styles.cardUserTop}>
+                          <h4 className={styles.cardUserName}>{item.name} </h4>
+                          <CheckCircleRoundedIcon
+                            style={{ color: 'green' }}
+                          ></CheckCircleRoundedIcon>
+                        </div>
+                        <div className={styles.cardUserGame}>{item.class}</div>
+                      </div>
                     </div>
-                    <div className={styles.cardUserGame}>Call of Duty</div>
+                  </div>
+                  <div className={styles.cardBottom}>
+                    <div className={styles.cardLive}>
+                      {/* <Box style={{ marginRight: '5px' }}>{selectorData}</Box> */}
+                      <span>{item.price || 0}đ</span>
+                    </div>
+
+                    <div
+                      onClick={(e) => {
+                        handleClickAddCard(e, item)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                      className={styles.cardWatching}
+                    >
+                      Thêm giỏ hàng
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className={styles.cardBottom}>
-                <div className={styles.cardLive}>
-                  <span>600.000 đ</span>
-                </div>
-                <div className={styles.cardWatching}>4.2k Lươt mua</div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.cardItem}>
+            ))}
+          {/* <div className={styles.cardItem}>
             <img
               src="https://images.unsplash.com/photo-1541336032412-2048a678540d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
               alt="hinh-card"
@@ -177,7 +301,7 @@ function ListCard(props) {
                 <div className={styles.cardWatching}>4.2k Lươt mua</div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* <div className={styles.footerDay2}>
           <h1 className={styles.textContenDay2}>{props.dataDemo.description.it}</h1>
@@ -205,19 +329,22 @@ function ListCard(props) {
           </div>
         </div> */}
       </div>
+      <Footer></Footer>
     </React.Fragment>
   )
 }
 export default ListCard
 
 // export async function getStaticProps() {
-//   const data = await fetch('localhost:3031/api/product').catch((error) => {
-//     console.log(error)
-//   })
+//   const data = await fetch('http://45.77.244.252:5000/api/product').catch(
+//     (error) => {
+//       console.log(error)
+//     }
+//   )
 //   const returnData = await data.json()
 //   return {
 //     props: {
-//       dataDemo: returnData,
+//       dataProduct: returnData,
 //     },
 //   }
 // }
@@ -269,6 +396,17 @@ export default ListCard
 //     },
 //   }
 // }
+
+// server
+// {
+//  listen 80;
+//     server_name epayment.kytek.io;
+//     location /
+//     {
+//         proxy_pass http://127.0.0.1:3000;
+//     }
+// }
+
 // Implement 2 trang detail và 3 trang list all
 //- Trong đó bao gồm 1 số function liên quan useState và truyền data hay thay đổi data tạm
 //- Có add localstorage

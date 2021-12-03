@@ -1,0 +1,315 @@
+.post-title {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #3f2a78;
+}
+.post-time {
+  color: #ccc;
+  text-transform: uppercase;
+}
+
+.container {
+  padding: 20px;
+}
+.cardList {
+  --spacing: 25px;
+  --columns: 4;
+  display: flex;
+  margin-left: calc(-1 * var(--spacing));
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 767px) {
+  .cardList {
+    --spacing: 15px;
+    --columns: 1;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .cardList {
+    --columns: 2;
+  }
+}
+.cardItem {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: calc(calc(100% / var(--columns)) - var(--spacing));
+  margin-left: var(--spacing);
+  margin-bottom: var(--spacing);
+}
+
+.cardImage {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.cardTop {
+  padding: 25px;
+}
+.cardTitle {
+  font-weight: 500;
+  margin-bottom: 25px;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+.cardUser {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+.cardUserAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 100rem;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.cardUserInfo {
+  padding-left: 20px;
+  flex: 1;
+}
+.cardUserTop {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+.cardUserName {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  margin-right: 5px;
+}
+.cardUserGame {
+  color: #999;
+  font-size: 13px;
+  font-weight: 300;
+}
+.cardBottom {
+  padding: 25px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardLive {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  border-radius: 10px;
+  background: #ff6651;
+}
+.cardLive span {
+  margin-left: 10px;
+}
+.cardWatching {
+  font-size: 13px;
+  color: #999;
+  font-weight: 300;
+}
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.cardBottom {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+.cardItem {
+  flex-direction: column;
+  display: flex;
+}
+
+.image {
+  max-width: 100%;
+  cursor: pointer;
+  height: auto;
+  border-radius: 8px 8px 0px 0px;
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.imgAboutUs {
+  border-radius: 50%;
+  height: '100px';
+  width: '100px';
+}
+.textContenAboutUs {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.titleAboutUs {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-top: 0;
+  color: inherit;
+  font-size: 1.5rem;
+}
+.date {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1.5rem;
+  margin-top: 0;
+  color: inherit;
+}
+.imageOurPeople {
+  border: 0.5rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  color: #64a19d;
+  height: 14rem;
+  width: 14rem;
+  cursor: pointer;
+}
+.imgBgFooter {
+  height: 20vh;
+
+  padding: 10rem 0;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.5) 75%,
+      #000000 100%
+    ),
+    url(https://f5seconds.vn/wp-content/uploads/2020/11/46888381194_0f30652e5c_h-e1606311950609.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  width: 100%;
+
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.infoDetail {
+  background-color: #000000;
+}
+.listItemInfo {
+  display: flex;
+}
+.itemInfo {
+  flex-direction: column;
+  display: flex;
+  background-color: #fff;
+  position: relative;
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  border-radius: 5px;
+  padding: 1rem;
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-bottom: 0.25rem solid #64a19d;
+}
+.nameInfo {
+  font-weight: 500;
+  line-height: 1.2;
+  margin-top: 20px;
+}
+.lineSpace {
+}
+.detailInfo {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+.detailInfo:hover,
+.detailInfo:focus,
+.detailInfo:active {
+  color: #64a19d;
+  text-decoration: underline;
+}
+
+.imgBanner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.7) 75%,
+      #000000 100%
+    ),
+    url(https://f5seconds.vn/wp-content/uploads/2020/11/banner-header-e1606311063982.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  height: 100vh;
+  padding: 0;
+}
+.titleF5seconds {
+  font-family: varela round, -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, sans-serif, apple color emoji, segoe ui emoji,
+    segoe ui symbol, noto color emoji;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.8rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+.undertitleF5seconds {
+  font-family: varela round, -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, sans-serif, apple color emoji, segoe ui emoji,
+    segoe ui symbol, noto color emoji;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.8rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.footerDay2 {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 10%;
+}
+.textContenDay2 {
+  font-weight: 500;
+  margin-bottom: 25px;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+.listImageDay2 {
+  margin-left: 30px;
+}

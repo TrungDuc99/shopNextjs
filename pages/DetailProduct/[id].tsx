@@ -1,9 +1,13 @@
 import React from 'react'
-import { getDetail, getDetailID } from '../api/hello'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+import { getDetail, getDetailID } from '../api/services'
 import Detail from './Detail'
 
 function ListItem(props: any) {
-  console.log(props)
+  const dataCart = useSelector((state: any) => state.addCartRedux)
+
+  console.log(dataCart)
 
   return (
     <div>
