@@ -2,7 +2,7 @@
   "name": "demo3",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "size": "node --max_old_space_size=4096",
