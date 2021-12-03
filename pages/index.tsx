@@ -88,49 +88,49 @@ function ListCard(props) {
   //       console.log(error)
   //     })
   // }, [])
-///--------------git stash
-  useEffect(() => {
-    const client = new ApolloClient({
-      uri: 'http://localhost:5000/graphql',
-      cache: new InMemoryCache(),
-    })
-
-    client
-      .mutate({
-        mutation: queriesExampleMutationUpdate,
-        variables: {
-          id: '618d1abe3240c54f1035988c',
-          name: 'testt updateeeeee graphql',
-          price: '12314141asdaasf5',
-          description: 'demomoo updateeeeee graphql',
-        },
-      })
-      .then((res) => {
-        console.log('Resilt', res)
-      })
-  }, [])
-
+  ///--------------git stash
   // useEffect(() => {
   //   const client = new ApolloClient({
-  //     uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
+  //     uri: 'http://localhost:5000/graphql',
   //     cache: new InMemoryCache(),
   //   })
+
   //   client
-  //     .query({
-  //       query: queriesAxies,
+  //     .mutate({
+  //       mutation: queriesExampleMutationUpdate,
   //       variables: {
-  //         from: 0,
-  //         size: 20,
-  //         sort: 'IdDesc',
-  //         auctionType: 'All',
-  //         owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+  //         id: '618d1abe3240c54f1035988c',
+  //         name: 'testt updateeeeee graphql',
+  //         price: '12314141asdaasf5',
+  //         description: 'demomoo updateeeeee graphql',
   //       },
   //     })
   //     .then((res) => {
-  //       setData(res.data.axies.results)
-  //       // console.log(res.data.axies.results)
+  //       console.log('Resilt', res)
   //     })
-  // })
+  // }, [])
+
+  useEffect(() => {
+    const client = new ApolloClient({
+      uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
+      cache: new InMemoryCache(),
+    })
+    client
+      .query({
+        query: queriesAxies,
+        variables: {
+          from: 0,
+          size: 20,
+          sort: 'IdDesc',
+          auctionType: 'All',
+          owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+        },
+      })
+      .then((res) => {
+        setData(res.data.axies.results)
+        // console.log(res.data.axies.results)
+      })
+  })
 
   const handleRemoveCart = (e, id) => {
     const newListCart = listCart.filter((item) => item._id != id)
