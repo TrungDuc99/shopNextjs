@@ -27,6 +27,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     // <ApolloProvider client={client}>
     <Provider store={store}>
       <Head>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" />
+
         <meta
           httpEquiv="Cache-Control"
           content="no-cache, no-store, must-revalidate"

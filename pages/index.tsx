@@ -79,7 +79,69 @@ function ListCard(props) {
   //   },
   // })
 
+  //-------------BUOI 3-------------------
+
+  // <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  // <script>
+  //   window.OneSignal = window.OneSignal || [];
+  //   OneSignal.push(function() {
+  //     OneSignal.init({
+  //       appId: "5ca53c07-0bbc-4842-89ad-96306a6e3e06",
+  //     });
+  //   });
+  // </script>
+
+  // <script
+  {
+    /* <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" /> */
+  }
+
+  // const initOnesginal = () => {
+  //     if (window.Onesignal) return false;
+  //     console.log('Go init')
+  //     var OneSignal = window.OneSignal || [];
+  //     OneSignal.push(async function () {
+  //       console.log('Init done')
+  //       OneSignal.init({
+  //         appId: "5a543c5e-98e2-4877-93f4-fd294533b3b0",
+  //         // allowLocalhostAsSecureOrigin: true,
+  //         // restrictedOriginEnabled: false,
+  //         // autoRegister: true,
+  //         // notifyButton: {
+  //         //   enable: false
+  //         // }
+  //       })
+  //       const userId = await window.OneSignal.getUserId().then(res=>{
+  //         console.log('Go go', res)
+  //       })
+  //       console.log('userId', userId)
+  //     });
+  //   }
+  //-----------
+
   useEffect(() => {
+    const initOnesginal = () => {
+      if (window.Onesignal) return false
+      console.log('Go init')
+      var OneSignal = window.OneSignal || []
+      OneSignal.push(async function () {
+        console.log('Init done')
+        OneSignal.init({
+          appId: '5ca53c07-0bbc-4842-89ad-96306a6e3e06',
+          // allowLocalhostAsSecureOrigin: true,
+          // restrictedOriginEnabled: false,
+          // autoRegister: true,
+          // notifyButton: {
+          //   enable: false
+          // }
+        })
+        const userId = await window.OneSignal.getUserId().then((res) => {
+          console.log('Go go', res)
+        })
+        console.log('userId', userId)
+      })
+    }
+
     getProduct()
       .then((res) => {
         setData(res.data)
