@@ -15,9 +15,9 @@ import { dataUserRedux } from '../controller/redux/reducers/storageReducers'
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    intervalRedux()
-    refreshUserDataGlobal()
-    refreshProductDataGlobal()
+    // intervalRedux()
+    // refreshUserDataGlobal()
+    // refreshProductDataGlobal()
   }, [])
   // const client = new ApolloClient({
   //   uri: 'https://axieinfinity.com/graphql-server-v2/graphql',

@@ -120,6 +120,26 @@ function ListCard(props) {
   //-----------
 
   useEffect(() => {
+    const client = new ApolloClient({
+      uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
+      cache: new InMemoryCache(),
+    })
+    client
+      .query({
+        query: queriesAxies,
+        variables: {
+          from: 0,
+          size: 20,
+          sort: 'IdDesc',
+          auctionType: 'All',
+          owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+        },
+      })
+      .then((res) => {
+        setData(res.data.axies.results)
+        // console.log(res.data.axies.results)
+      })
+
     const initOnesginal = () => {
       if (window.Onesignal) return false
       console.log('Go init')
