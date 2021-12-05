@@ -148,12 +148,12 @@ function ListCard(props) {
         console.log('Init done')
         OneSignal.init({
           appId: '5ca53c07-0bbc-4842-89ad-96306a6e3e06',
-          // allowLocalhostAsSecureOrigin: true,
-          // restrictedOriginEnabled: false,
-          // autoRegister: true,
-          // notifyButton: {
-          //   enable: false
-          // }
+          allowLocalhostAsSecureOrigin: true,
+          restrictedOriginEnabled: false,
+          autoRegister: true,
+          notifyButton: {
+            enable: false,
+          },
         })
         const userId = await window.OneSignal.getUserId().then((res) => {
           console.log('Go go', res)
@@ -162,13 +162,13 @@ function ListCard(props) {
       })
     }
 
-    getProduct()
-      .then((res) => {
-        setData(res.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    // getProduct()
+    //   .then((res) => {
+    //     setData(res.data)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   }, [])
   ///--------------git stash
   // useEffect(() => {
@@ -192,27 +192,27 @@ function ListCard(props) {
   //     })
   // }, [])
 
-  useEffect(() => {
-    // const client = new ApolloClient({
-    //   uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
-    //   cache: new InMemoryCache(),
-    // })
-    // client
-    //   .query({
-    //     query: queriesAxies,
-    //     variables: {
-    //       from: 0,
-    //       size: 20,
-    //       sort: 'IdDesc',
-    //       auctionType: 'All',
-    //       owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
-    //     },
-    //   })
-    //   .then((res) => {
-    //     setData(res.data.axies.results)
-    //     // console.log(res.data.axies.results)
-    //   })
-  })
+  // useEffect(() => {
+  // const client = new ApolloClient({
+  //   uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
+  //   cache: new InMemoryCache(),
+  // })
+  // client
+  //   .query({
+  //     query: queriesAxies,
+  //     variables: {
+  //       from: 0,
+  //       size: 20,
+  //       sort: 'IdDesc',
+  //       auctionType: 'All',
+  //       owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+  //     },
+  //   })
+  //   .then((res) => {
+  //     setData(res.data.axies.results)
+  //     // console.log(res.data.axies.results)
+  //   })
+  // })
 
   const handleRemoveCart = (e, id) => {
     const newListCart = listCart.filter((item) => item._id != id)
@@ -492,3 +492,60 @@ export default ListCard
 // Implement 2 trang detail và 3 trang list all
 //- Trong đó bao gồm 1 số function liên quan useState và truyền data hay thay đổi data tạm
 //- Có add localstorage
+//------------------- pm2 -------ls để xem thư mục
+//câu lệnh : sudo defaul, nano default , nano start.sh, pm2 log 0 ,pm2 restart 0 , sudo nano default
+// 1 - Login : ssh songtoan@45.77.244.252
+// 2 - sudo nano default : cấu hình npm run dev
+// 3 - pm2 log 0 : chạy code trong pm2
+// 4 - nano start.sh : định nghĩa file để chạy code
+// 5 - pm2 restart 0 : lệnh chạy lại code trong pm2
+// 6 -  /etc/nginx/sites-available (1): cấu hình localhost
+// 7 - nano default (2): //server
+// {
+//   listen 80;
+//      server_name linkkienphamlap.kytek.io;
+//      location /
+//      {
+//          proxy_pass http://127.0.0.1:8081;
+//      }
+//  }
+
+//  server
+//  {
+//   listen 80;
+//      server_name linkkienphamlap-server.kytek.io;
+//      location /
+//      {
+//          proxy_pass http://127.0.0.1:5000;
+//      }
+//  }
+
+// 8 - pm2 start dev.sh --name shop : restart file code hiện hành với name là shop lên "pm2 l"
+// 9 - pm2 l : xem các host đang chạy
+// 10 - nano dev.sh :định nghĩa run trong file hiện hành
+//
+//
+//
+//
+//
+// linkkienphamlap-server.kytek.io , https://linkkienphamlap.kytek.io,https://linkkienphamlap-server.kytek.io/api/product
+
+//server
+// {
+//   listen 80;
+//      server_name linkkienphamlap.kytek.io;
+//      location /
+//      {
+//          proxy_pass http://127.0.0.1:8081;
+//      }
+//  }
+
+//  server
+//  {
+//   listen 80;
+//      server_name linkkienphamlap-server.kytek.io;
+//      location /
+//      {
+//          proxy_pass http://127.0.0.1:5000;
+//      }
+//  }
