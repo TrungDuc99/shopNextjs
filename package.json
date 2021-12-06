@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev -p 8081",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8081",
     "size": "node --max_old_space_size=4096",
     "fix:prettier": "prettier --write ."
   },
