@@ -28,6 +28,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     initOneSignalNotification()
     getOnesignalId()
+
+    console.log(getOnesignalId())
+
     // intervalRedux()
     // refreshUserDataGlobal()
     // refreshProductDataGlobal()
