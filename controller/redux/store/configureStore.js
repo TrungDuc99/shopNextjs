@@ -19,12 +19,9 @@ const makeStore = () => {
       key: 'nextjs',
       storage,
     }
-
     const persistedReducer = persistReducer(persistConfig, rootReducer)
     const store = makeConfiguredStore(persistedReducer)
-
     store.__persistor = persistStore(store)
-
     return store
   }
 }

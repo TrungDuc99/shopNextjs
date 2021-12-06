@@ -12,6 +12,7 @@ import {
 import { useEffect } from 'react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { dataUserRedux } from '../controller/redux/reducers/storageReducers'
+import { getOnesignalId } from './notify'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const initOneSignalNotification = () => {
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     initOneSignalNotification()
+    getOnesignalId()
     // intervalRedux()
     // refreshUserDataGlobal()
     // refreshProductDataGlobal()

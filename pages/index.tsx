@@ -68,15 +68,6 @@ function ListCard(props) {
     newTodos.push(item)
     setListCart(newTodos)
   }
-  const initOneSignalNotification = () => {
-    if (window.Onesignal) return false
-    var OneSignal = window.OneSignal || []
-    OneSignal.push(function () {
-      OneSignal.init({
-        appId: '5ca53c07-0bbc-4842-89ad-96306a6e3e06',
-      })
-    })
-  }
 
   // const { loading, error, data } = useQuery(queriesAxies, {
   //   variables: {
@@ -178,7 +169,7 @@ function ListCard(props) {
     //   .catch((error) => {
     //     console.log(error)
     //   })
-  }, [initOneSignalNotification])
+  }, [])
   ///--------------git stash
   // useEffect(() => {
   //   const client = new ApolloClient({
