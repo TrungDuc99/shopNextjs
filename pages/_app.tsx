@@ -14,7 +14,18 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { dataUserRedux } from '../controller/redux/reducers/storageReducers'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const initOneSignalNotification = () => {
+    if (window.Onesignal) return false
+    var OneSignal = window.OneSignal || []
+    OneSignal.push(function () {
+      OneSignal.init({
+        appId: '5ca53c07-0bbc-4842-89ad-96306a6e3e06',
+      })
+    })
+  }
+
   useEffect(() => {
+    initOneSignalNotification()
     // intervalRedux()
     // refreshUserDataGlobal()
     // refreshProductDataGlobal()
