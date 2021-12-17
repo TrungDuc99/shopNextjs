@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { queriesExample } from '../queries'
-import './styles.scss'
+
 import Detail from './Detail'
 function ListItem(props: any) {
   const router = useRouter()
@@ -38,7 +38,7 @@ function ListItem(props: any) {
     <React.Fragment>
       <Header></Header>
       <Container maxWidth="lg">
-        <div className="containDetail">
+        <div>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <img
               style={{ width: '300px', height: '320px' }}
