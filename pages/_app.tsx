@@ -29,8 +29,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     initOneSignalNotification()
     getOnesignalId()
 
-    console.log(getOnesignalId())
-
     // intervalRedux()
     // refreshUserDataGlobal()
     // refreshProductDataGlobal()
@@ -61,6 +59,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     </Provider>
     // </ApolloProvider>
   )
+  // cabbage grocery early profit maximum caught deny clip treat excuse clump inherit
 }
+
+//-----------Blockchange
+//https://www.tutorialspoint.com/go/index.htm trang hoc ngôn ngữ golang
+//http://remix.ethereum.org/#optimize=false&version=soljson-v0.8.10+commit.fc410830.js&runs=200&evmVersion=null -- trang code blockchange
+
+// http://remix.ethereum.org/#optimize=false&version=soljson-v0.5.2+commit.1df8f40c.js&runs=200&evmVersion=null
+// From Giảng viên 5 to Everyone 09:31 PM
+// https://web3js.readthedocs.io/en/v1.5.2/
+// window.web3.send_transaction
 
 export default MyApp

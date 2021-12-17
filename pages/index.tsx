@@ -5,6 +5,8 @@ import Header from '../src/components/header/Header'
 import Footer from '../src/components/footer/Footer'
 import styles from '../styles/Home.module.css'
 import {
+  AddCart,
+  DeleteCart,
   setDataCartRedux,
   setDataProductRedux,
   setDataRedux,
@@ -33,8 +35,10 @@ function ListCard(props) {
   const [data, setData] = useState()
   const [listCart, setListCart] = useState([])
   const router = useRouter()
+  const dispatch = useDispatch()
+  const cart = useSelector((state: any) => state.cartReducer)
+  console.log(cart)
 
-  // const dispatch = useDispatch()
   // const connRedux = (state: any) => state.dataRedux
   // const selectorRedux = createSelector(connRedux, (data) => {
   //   return data
@@ -59,10 +63,14 @@ function ListCard(props) {
 
   // console.log(dataCart)
   const handleClick = (e, item) => {
-    router.push('/DetailProduct/' + item.id)
+    console.log(item)
+
+    router.push('/DetailProduct/' + item._id)
   }
 
   const handleClickAddCard = (e, item) => {
+    // const action = AddCart(item)
+    // dispatch(action)
     cartDataGlobal(item)
     const newTodos = [...listCart]
     newTodos.push(item)
@@ -120,25 +128,25 @@ function ListCard(props) {
   //-----------
 
   useEffect(() => {
-    const client = new ApolloClient({
-      uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
-      cache: new InMemoryCache(),
-    })
-    client
-      .query({
-        query: queriesAxies,
-        variables: {
-          from: 0,
-          size: 20,
-          sort: 'IdDesc',
-          auctionType: 'All',
-          owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
-        },
-      })
-      .then((res) => {
-        setData(res.data.axies.results)
-        // console.log(res.data.axies.results)
-      })
+    // const client = new ApolloClient({
+    //   uri: 'https://axieinfinity.com/graphql-server-v2/graphql',
+    //   cache: new InMemoryCache(),
+    // })
+    // client
+    //   .query({
+    //     query: queriesAxies,
+    //     variables: {
+    //       from: 0,
+    //       size: 20,
+    //       sort: 'IdDesc',
+    //       auctionType: 'All',
+    //       owner: '0x4E281AdD1E87F5aa0fD9c39D8Bcfd7C1a6da61fD',
+    //     },
+    //   })
+    //   .then((res) => {
+    //     setData(res.data.axies.results)
+    //     // console.log(res.data.axies.results)
+    //   })
 
     // const initOnesginal = () => {
     //   if (window.Onesignal) return false
@@ -162,35 +170,35 @@ function ListCard(props) {
     //   })
     // }
 
-    // getProduct()
-    //   .then((res) => {
-    //     setData(res.data)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
+    getProduct()
+      .then((res) => {
+        setData(res.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }, [])
   ///--------------git stash
-  // useEffect(() => {
-  //   const client = new ApolloClient({
-  //     uri: 'http://localhost:5000/graphql',
-  //     cache: new InMemoryCache(),
-  //   })
+  useEffect(() => {
+    const client = new ApolloClient({
+      uri: 'http://localhost:5000/graphql',
+      cache: new InMemoryCache(),
+    })
 
-  //   client
-  //     .mutate({
-  //       mutation: queriesExampleMutationUpdate,
-  //       variables: {
-  //         id: '618d1abe3240c54f1035988c',
-  //         name: 'testt updateeeeee graphql',
-  //         price: '12314141asdaasf5',
-  //         description: 'demomoo updateeeeee graphql',
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log('Resilt', res)
-  //     })
-  // }, [])
+    client
+      .mutate({
+        mutation: queriesExampleMutationUpdate,
+        variables: {
+          id: '618d1abe3240c54f1035988c',
+          name: 'testt updateeeeee graphql',
+          price: '12314141asdaasf5',
+          description: 'demomoo updateeeeee graphql',
+        },
+      })
+      .then((res) => {
+        console.log('Resilt', res)
+      })
+  }, [])
 
   // useEffect(() => {
   // const client = new ApolloClient({
@@ -215,6 +223,9 @@ function ListCard(props) {
   // })
 
   const handleRemoveCart = (e, id) => {
+    const action = DeleteCart(id)
+    dispatch(action)
+
     const newListCart = listCart.filter((item) => item._id != id)
     setListCart(newListCart)
   }
@@ -494,6 +505,7 @@ export default ListCard
 //- Có add localstorage
 //------------------- pm2 -------ls để xem thư mục
 //câu lệnh : sudo defaul, nano default , nano start.sh, pm2 log 0 ,pm2 restart 0 , sudo nano default
+// 0 -  pm2 start dev.sh shopNextjs
 // 1 - Login : ssh songtoan@45.77.244.252
 // 2 - sudo nano default : cấu hình npm run dev
 // 3 - pm2 log 0 : chạy code trong pm2

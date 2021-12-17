@@ -30,6 +30,20 @@ export const queriesExample = gql`
     product(id: $id) {
       name
       price
+      description
+      image
+      isActive
+      price
+    }
+  }
+`
+export const queriesExampleGetAll = gql`
+  query getAllProducts($name: String, $price: String, $description: String) {
+    getAllProducts {
+      name
+      price
+      isActive
+      description
     }
   }
 `

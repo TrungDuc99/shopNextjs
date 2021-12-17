@@ -35,18 +35,34 @@ const initialState = {
   delivery: 5,
 }
 export const cartReducer = (state = initialState, action) => {
+  console.log(action)
   switch (action.type) {
-    case UPDATE_QTY:
-      let existedItem = state.cart.filter(
-        (cartItem) => cartItem.id === action.payload.id
+    case 'ADD_CART':
+      const newList = state.cart
+      if (
+        action.payload._id !=
+        newList.filter((item) => {
+          item._id
+        })
       )
-      existedItem[0].qty = action.payload.qty
+        newList.push(action.payload)
+
+      // let existedItem = state.cart.filter(
+      //   (cartItem) => cartItem._id === action.payload._id
+      // )
+      // existedItem[0].qty = action.payload.qty
       return {
         ...state,
-        qty, // how to get rid of mutation here?
+        cart: existedItem,
+        // how to get rid of mutation here?
       }
-    case UPDATE_CART:
-      return { ...state, cart: [...state.cart, action.payload] }
+    case 'DELETE_CART':
+      const newListCart = state.cart
+      const newListCartDeleted = newListCart.filter(
+        (item) => item._id != action.payload
+      )
+
+      return { ...state, cart: newListCartDeleted }
     default:
       return state
   }
