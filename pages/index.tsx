@@ -181,7 +181,7 @@ function ListCard(props) {
   ///--------------git stash
   useEffect(() => {
     const client = new ApolloClient({
-      uri: 'http://localhost:5000/graphql',
+      uri: 'https://linkkienphamlap-server.kytek.io/graphql',
       cache: new InMemoryCache(),
     })
 
