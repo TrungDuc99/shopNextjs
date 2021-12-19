@@ -24,14 +24,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       })
     })
   }
-
-  useEffect(() => {
+ 
+ 
+  useEffect(async() => {
     initOneSignalNotification()
  
-    getOnesignalId().then((res)=>{
-      console.log(res);
-      
-    })
+    getOnesignalId()
+  
+   
+            const userId = await window.OneSignal.getUserId().then(res=>{
+    console.log('Go go', res)
+  })
+  console.log('userId', userId)
+            
     // intervalRedux()
     // refreshUserDataGlobal()
     // refreshProductDataGlobal()
