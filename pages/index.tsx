@@ -180,24 +180,20 @@ function ListCard(props) {
   }, [])
   ///--------------git stash
   useEffect(() => {
-    const client = new ApolloClient({
-      uri: 'https://linkkienphamlap-server.kytek.io/graphql',
-      cache: new InMemoryCache(),
-    })
-
-    client
-      .mutate({
-        mutation: queriesExampleMutationUpdate,
-        variables: {
-          id: '618d1abe3240c54f1035988c',
-          name: 'testt updateeeeee graphql',
-          price: '12314141asdaasf5',
-          description: 'demomoo updateeeeee graphql',
-        },
-      })
-      .then((res) => {
-        console.log('Resilt', res)
-      })
+    // const client = new ApolloClient({
+    //   uri: 'https://linkkienphamlap-server.kytek.io/graphql',
+    //   cache: new InMemoryCache(),
+    // })
+    // client
+    //   .mutate({
+    //     mutation: queriesExample,
+    //     variables: {
+    //       id: '618d1abe3240c54f1035988c',
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log('Resilt', res)
+    //   })
   }, [])
 
   // useEffect(() => {
@@ -503,6 +499,8 @@ export default ListCard
 // Implement 2 trang detail và 3 trang list all
 //- Trong đó bao gồm 1 số function liên quan useState và truyền data hay thay đổi data tạm
 //- Có add localstorage
+//---các câu lệnh trong Linux
+//https://techmaster.vn/posts/33519/cau-lenh-linux-can-biet-1
 //------------------- pm2 -------ls để xem thư mục
 //câu lệnh : sudo defaul, nano default , nano start.sh, pm2 log 0 ,pm2 restart 0 , sudo nano default
 // 0 -  pm2 start dev.sh shopNextjs

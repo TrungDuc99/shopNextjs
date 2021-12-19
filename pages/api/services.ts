@@ -7,7 +7,22 @@ type Data = {
 }
 
 export async function getUser() {
-  const data = await fetch('https://linkkienphamlap-server.kytek.io/api/user').catch(
+  const data = await fetch('http://localhost:5000/api/user').catch((error) => {
+    console.log(error)
+  })
+  const returnData = await data.json()
+  return returnData
+}
+
+export async function getProduct() {
+  const data = await fetch('http://localhost:5000/api/product').catch((error) => {
+    console.log(error)
+  })
+  const returnData = await data.json()
+  return returnData
+}
+export async function getOnlyProduct(id) {
+  const data = await fetch(`http://localhost:5000/api/product/${id}`).catch(
     (error) => {
       console.log(error)
     }
@@ -15,21 +30,8 @@ export async function getUser() {
   const returnData = await data.json()
   return returnData
 }
-
-export async function getProduct() {
-  const data = await fetch(
-    'https://linkkienphamlap-server.kytek.io/api/product'
-  ).catch((error) => {
-    console.log(error)
-  })
-  const returnData = await data.json()
-  return returnData
-}
-
 export async function getCategory() {
-  const data = await fetch(
-    'https://linkkienphamlap-server.kytek.io/api/category'
-  ).catch((error) => {
+  const data = await fetch('http://localhost:5000/api/category').catch((error) => {
     console.log(error)
   })
   const returnData = await data.json()
